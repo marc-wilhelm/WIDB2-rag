@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  python-env:
+    image: python:3.13
+    container_name: python-env
+    working_dir: /app
+    volumes:
+      - ./:/app
+    stdin_open: true
+    tty: true
+    command: python
+    environment:
+      - PYTHONUNBUFFERED=1
