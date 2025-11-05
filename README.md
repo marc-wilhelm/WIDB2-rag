@@ -10,9 +10,22 @@ TODO: EINLEITUNG EINFÜGEN
 
 ## Einrichten
 
-TODO: EINRICHTUNG BESCHREIBEN
+### Voraussetzungen
+
+Zum Einrichten ist es nötig Python und Docker Desktop installiert zu haben.
+
+Siehe Hilfe zu Docker [hier](docs/docker_help.md)
+
+#### Python
+
+eine Python Version
+
+#### Docker
+
+Docker Desktop (mit compose)
 
 ## Projekt Struktur
+
 ```
 WIDB2-rag/
 │

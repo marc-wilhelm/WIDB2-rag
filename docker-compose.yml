@@ -1,14 +1,46 @@
-version: '3.8'
-
 services:
-  python-env:
-    image: python:3.13
-    container_name: python-env
+  # Python RAG-Anwendung
+  rag-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rag-app
     working_dir: /app
     volumes:
-      - ./:/app
-    stdin_open: true
-    tty: true
-    command: python
+      - ./:/app  # Code wird synchronisiert
+    ports:
+      - "8501:8501"  # Streamlit
     environment:
       - PYTHONUNBUFFERED=1
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - CHROMADB_HOST=chromadb  # Verbindung zur Datenbank
+      - CHROMADB_PORT=8000
+    depends_on:
+      - chromadb  # Wartet bis Datenbank läuft
+    networks:
+      - rag-network
+
+  # ChromaDB Vektordatenbank
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: chromadb
+    ports:
+      - "8000:8000"  # API Port
+    volumes:
+      - chroma_data:/chroma/chroma  # Persistente Daten
+    environment:
+      - IS_PERSISTENT=TRUE
+      - ANONYMIZED_TELEMETRY=FALSE
+    networks:
+      - rag-network
+
+# Persistente Volumes für Datenbank
+volumes:
+  chroma_data:
+    driver: local
+
+# Netzwerk damit Container sich finden
+networks:
+  rag-network:
+    driver: bridge
