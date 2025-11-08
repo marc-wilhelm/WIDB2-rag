@@ -1,46 +1,70 @@
 services:
-  # Python RAG-Anwendung
-  rag-app:
+  # Python Environment für Entwicklung
+  python-env:
+    image: widb2-rag:latest
+    container_name: python-env
+    working_dir: /app
+    volumes:
+      - ./:/app
+    stdin_open: true
+    tty: true
+    command: sleep infinity
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - rag-network
+
+  # Weaviate Vektordatenbank
+  weaviate:
+    image: cr.weaviate.io/semitechnologies/weaviate:1.32.2
+    container_name: weaviate
+    ports:
+      - "8080:8080"
+      - "50051:50051"
+    environment:
+      ENABLE_MODULES: text2vec-model2vec
+      MODEL2VEC_INFERENCE_API: http://text2vec-model2vec:8080
+      QUERY_DEFAULTS_LIMIT: 25
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
+      PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
+      CLUSTER_HOSTNAME: 'node1'
+    volumes:
+      - weaviate_data:/var/lib/weaviate
+    networks:
+      - rag-network
+
+  # Embedding Model für Weaviate
+  text2vec-model2vec:
+    image: cr.weaviate.io/semitechnologies/model2vec-inference:minishlab-potion-base-32M
+    container_name: text2vec-model2vec
+    networks:
+      - rag-network
+
+  # RAG Streamlit-Anwendung
+  widb2-rag:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: rag-app
+    image: widb2-rag:latest
+    container_name: widb2-rag
     working_dir: /app
     volumes:
-      - ./:/app  # Code wird synchronisiert
+      - ./:/app
     ports:
-      - "8501:8501"  # Streamlit
+      - "8501:8501"
     environment:
       - PYTHONUNBUFFERED=1
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-      - CHROMADB_HOST=chromadb  # Verbindung zur Datenbank
-      - CHROMADB_PORT=8000
+      - WEAVIATE_URL=http://weaviate:8080
     depends_on:
-      - chromadb  # Wartet bis Datenbank läuft
+      - weaviate
     networks:
       - rag-network
 
-  # ChromaDB Vektordatenbank
-  chromadb:
-    image: chromadb/chroma:latest
-    container_name: chromadb
-    ports:
-      - "8000:8000"  # API Port
-    volumes:
-      - chroma_data:/chroma/chroma  # Persistente Daten
-    environment:
-      - IS_PERSISTENT=TRUE
-      - ANONYMIZED_TELEMETRY=FALSE
-    networks:
-      - rag-network
-
-# Persistente Volumes für Datenbank
 volumes:
-  chroma_data:
-    driver: local
+  weaviate_data:
 
-# Netzwerk damit Container sich finden
 networks:
   rag-network:
     driver: bridge

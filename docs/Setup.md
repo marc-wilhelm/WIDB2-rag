@@ -1,6 +1,6 @@
 # Setup Hilfe
 
-## Virtuelle Umgebung aktivieren
+## Virtuelle Python Umgebung aktivieren
 
 ### Warum eine virtuelle Umgebung?
 

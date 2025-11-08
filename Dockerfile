@@ -1,17 +1,15 @@
-FROM python:3.12
+FROM python:3.12-slim
 
 WORKDIR /app
 
-# System-Dependencies für pandas/numpy
-RUN apt-get update && apt-get install -y \
-    gcc \
-    g++ \
-    && rm -rf /var/lib/apt/lists/*
+# uv installieren
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
-# Requirements kopieren und installieren
+# Packages installieren - VIEL schneller
 COPY requirements.txt .
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+RUN uv pip install --system -r requirements.txt
 
-# Container läuft dauerhaft
-CMD ["sleep", "infinity"]
+COPY . .
+EXPOSE 8501
+ENV PYTHONUNBUFFERED=1
+CMD ["streamlit", "run", "streamlit/1_🗨️_Chat.py"]

@@ -1,2 +1,4 @@
-a = 5
-print(f"a ist {a}")
+a = 10
+b = 20
+z = a + b
+print(f"a ist {z}")
