@@ -5,7 +5,7 @@ WORKDIR /app
 # uv installieren
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
-# Packages installieren - VIEL schneller
+# Packages mit uv installieren
 COPY requirements.txt .
 RUN uv pip install --system -r requirements.txt
 

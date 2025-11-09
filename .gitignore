@@ -144,20 +144,9 @@ atlassian-ide-plugin.xml
 # ============================================
 
 docker-compose.override.yml
-.dockerignore
 *.dockerfile
 Dockerfile.dev
 .docker/
-
-# ============================================
-# ChromaDB
-# ============================================
-
-chroma/
-chromadb/
-*.chroma
-chroma_data/
-.chroma/
 
 # ============================================
 # Project Specific
