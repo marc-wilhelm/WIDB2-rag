@@ -34,12 +34,12 @@ docker-compose up -d
 
 ## Services im Projekt
 
-| Service | Typ | Beschreibung |
-|---------|-----|--------------|
-| **widb2-rag** | ✅ Build | Wird aus lokalem Dockerfile gebaut |
-| **python-env** | 📦 Image | Nutzt bereits gebautes `widb2-rag:latest` Image |
-| **weaviate** | 📦 Image | Externes Image (Vektordatenbank) |
-| **text2vec-model2vec** | 📦 Image | Externes Image (Embedding-Modell) |
+| Service | Typ | Beschreibung                                                                                      |
+|---------|-----|---------------------------------------------------------------------------------------------------|
+| **widb2-rag** | ✅ Build | Wird aus lokalem Dockerfile gebaut (enthält streamlit & python packages aus der requirements.txt) |
+| **python-env** | 📦 Image | Nutzt bereits gebautes `widb2-rag:latest` Image                                                   |
+| **weaviate** | 📦 Image | Externes Image (Vektordatenbank)                                                                  |
+| **text2vec-model2vec** | 📦 Image | Externes Image (Embedding-Modell)                                                                 |
 
 ### Build vs. Image
 - **Build** (`widb2-rag`): Dockerfile wird ausgeführt → Image erstellt → Container gestartet
