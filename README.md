@@ -14,22 +14,16 @@ TODO: EINLEITUNG EINFÜGEN
 ### Voraussetzungen
 
 - Python 3.12.x ([Download](https://www.python.org/downloads/release/python-31212/))
-- Docker Desktop ([Installationsanleitung](https://docs.docker.com/get-started/introduction/get-docker-desktop/))
 
 ### Python Installation
 
-Python wird **nur** für die Verwaltung des Docker-Environments benötigt (z.B. IDE-Integration, Tools). Der Code wird ausschließlich im Docker-Container ausgeführt.
+Erst wird eine virtuelle Python umgebung benötigt. Mit dem folgenden Befehl wird das .venv erstellt, aktiviert und Packages installiert:
 
-**Empfohlen**: Python 3.12.x
+```bash
+python -m venv .venv && source .venv/Scripts/activate && pip install -r requirements.txt
+```
 
-### Docker Desktop Installation
-
-Docker stellt sicher, dass alle Teammitglieder unter identischen Bedingungen arbeiten:
-- Einheitliche Python-Version
-- Identische Package-Versionen
-- Einfaches Setup ohne manuelle Konfiguration
-
-**Weitere Infos**: [Docker Workflow im Projekt](docs/Docker.md)
+Für mehr Hilfe siehe [Setup Doku](docs/Setup.md)
 
 ## Projekt Struktur
 
@@ -37,33 +31,17 @@ Docker stellt sicher, dass alle Teammitglieder unter identischen Bedingungen arb
 WIDB2-rag/
 │
 ├── data/                           # Daten-Verzeichnis
-│   ├── raw/                        # Original-Dateien
-│   ├── processed/                  # Verarbeitete/Gechunkte Daten
-│   └── vector_db/                  # Vektordatenbank
 │
 ├── docs/                           # Dokumentation
 │
 ├── src/                            # Hauptcode
-│   │
-│   ├── data_processing/            # Datenverarbeitung
-│   │
-│   ├── rag/                        # RAG-Kernlogik
-│   │
-│   ├── llm/                        # LLM-Integration
-│   │
-│   └── utils/                      # Hilfsfunktionen
+│   └── tests/                      # Tests
 │
 ├── streamlit/                      # Frontend
 │   └── pages/                      # Unterseiten
 │
-├── tests/                          # Tests
-│
 ├── .env.example                   # Environment-Template
-├── .env                           # Tatsächliche Secrets (in .gitignore)
 ├── .gitignore
-├── .dockerignore
-├── docker-compose.yml
-├── Dockerfile
 ├── requirements.txt
 └── README.md
 ```

@@ -4,20 +4,36 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Pfade
+# ============================================================================
+# PFADE
+# ============================================================================
 PROJECT_ROOT = Path(__file__).parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
-RAW_DATA_DIR = DATA_DIR / "raw"
-PROCESSED_DATA_DIR = DATA_DIR / "processed"
-VECTOR_DB_DIR = DATA_DIR / "vector_db"
+MARKDOWN_FILE = DATA_DIR / "bericht.md"
 
-# API-Keys
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+# ============================================================================
+# API-KEYS
+# ============================================================================
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 
-# RAG-Konfiguration
+# ============================================================================
+# RAG-KONFIGURATION
+# ============================================================================
+# Vektordatenbank
+CHROMA_DB_PATH = "./data/chroma_db"  # Wird im data/ Ordner erstellt
+CHROMA_COLLECTION_NAME = "controlling_berichte"
+CHROMA_TEST_DB_PATH = "./data/chroma_test"
+CHROMA_TEST_COLLECTION_NAME = "controlling_berichte_test"
+
+# Embedding
+EMBEDDING_MODEL = "paraphrase-multilingual-MiniLM-L12-v2"
+
+# LLM
+CLAUDE_MODEL = "claude-sonnet-4-20250514"
+CLAUDE_MAX_TOKENS = 2048
+CLAUDE_TEMPERATURE = 0.1
+
+# Retrieval
+RAG_N_RESULTS = 5  # Anzahl der abzurufenden Chunks
 CHUNK_SIZE = 500
 CHUNK_OVERLAP = 50
-EMBEDDING_MODEL = "text-embedding-ada-002"
-LLM_MODEL = "gpt-4"
-TEMPERATURE = 0.1

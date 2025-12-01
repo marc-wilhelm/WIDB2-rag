@@ -1,12 +1,20 @@
 # Setup Hilfe
 
-## Virtuelle Python Umgebung aktivieren
-
-### Warum eine virtuelle Umgebung?
+## Virtuelle Python Umgebung
 
 Die virtuelle Umgebung isoliert die Python-Pakete dieses Projekts von deinem System, um Konflikte mit anderen Projekten zu vermeiden. Es ist wie ein separater Arbeitsplatz für dieses spezifische Projekt mit seinen eigenen Werkzeugen.
 
-### IDE-Setup (empfohlen)
+### Installation
+
+Mit dem folgenden Befehl wird das .venv erstellt, aktiviert und Packages installiert.
+
+```bash
+python -m venv .venv && source .venv/Scripts/activate && pip install -r requirements.txt
+```
+
+Damit ist das .venv direkt im Temrinal aktiviert, allerdings noch nicht in der IDE hinterlegt.
+
+### IDE-Setup
 
 Es ist empfehlenswert, die erstellte virtuelle Umgebung als Standard-Interpreter in deiner IDE zu hinterlegen. Dadurch erkennt die IDE automatisch alle installierten Pakete und bietet bessere Code-Vervollständigung.
 
@@ -26,21 +34,6 @@ Es ist empfehlenswert, die erstellte virtuelle Umgebung als Standard-Interpreter
 3. Wähle den erstellten .venv Pfad aus mit Klick auf die drei Punkte `...`:
    - `.venv/Scripts/python.exe` (Windows) oder
    - `.venv/bin/python` (macOS/Linux).
-
-**Manuelle Aktivierung im Terminal**
-
-Falls du direkt im Terminal arbeiten möchtest, kannst du die virtuelle Umgebung mit folgenden Befehlen aktivieren:
-
-**Windows (PowerShell):**
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
-
-**macOS/Linux oder Windows mit Bash:**
-```bash
-source .venv/bin/activate
-```
-
 
 ### Troubleshooting - Globale Python Umgebungen
 

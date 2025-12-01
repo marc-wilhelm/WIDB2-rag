@@ -1,19 +1,12 @@
-# RAG Framework
-
-
-# LLM
-langchain==1.0.5
-
-# Vector Database
-
-
-# Document Processing
-openpyxl==3.1.5
-
-# Frontend
-streamlit==1.51.0
-
-# Utilities
-python-dotenv==1.2.1
-pandas==2.3.3
-numpy==2.3.4
+# Packages
+langchain
+openpyxl
+streamlit
+python-dotenv
+pandas
+numpy
+chromadb
+sentence-transformers
+openai
+anthropic
+sqlalchemy
