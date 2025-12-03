@@ -19,6 +19,12 @@ TODO: EINLEITUNG EINFÜGEN
 
 Erst wird eine virtuelle Python umgebung benötigt. Mit dem folgenden Befehl wird das .venv erstellt, aktiviert und Packages installiert:
 
+**POWERSHELL**
+```powershell
+python -m venv .venv; .\.venv\Scripts\Activate.ps1; pip install -r requirements.txt
+```
+
+**BASH**
 ```bash
 python -m venv .venv && source .venv/Scripts/activate && pip install -r requirements.txt
 ```
