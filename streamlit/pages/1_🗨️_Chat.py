@@ -78,7 +78,7 @@ rag_agent, num_documents = initialize_rag_system()
 # Erfolgreiche Initialisierung anzeigen
 with st.sidebar:
     st.success("✅ RAG-System bereit")
-    st.info(f"📄 {num_documents} Dokumente geladen")
+    st.info(f"📄 {num_documents} Chunks geladen")
     st.markdown("---")
     st.markdown("### ℹ️ Hinweise")
     st.markdown("""

@@ -173,4 +173,7 @@ Dockerfile.dev
 Thumbs.db
 desktop.ini
 
+# ChromaDB
+.sqlite3
+.bin
 
