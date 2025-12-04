@@ -58,7 +58,7 @@ Hinter diesem Projekt im Modul WIDB2 stehen:
 
 <table>
   <tr><th>Name</th>              <th>Matrikelnummer</th></tr>
-  <tr><td>Niclas Gencer</td>     <td></td></tr>
+  <tr><td>Niclas Gencer</td>     <td>6622006</td></tr>
   <tr><td>Paul Gütling</td>      <td></td></tr>
   <tr><td>Johanna Kießling</td>  <td>6622009</td></tr>
   <tr><td>Maike Knauer</td>      <td>6622007</td></tr>
