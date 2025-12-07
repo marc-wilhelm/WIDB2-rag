@@ -5,5 +5,5 @@
 Um lokal Streamlit laufen zu lassen bitte im Terminal folgenden Command eingeben:
 
 ```bash
-streamlit run streamlit/🏠_Home.py
+streamlit run streamlit/Home.py
 ```
