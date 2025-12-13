@@ -51,7 +51,8 @@ class RAGAgent:
                 # Formatiere jedes Dokument mit seinen Metadaten
                 context_parts.append(
                     f"[Dokument {i + 1}]\n"
-                    f"Quelle: {meta.get('heading', 'N/A')}\n"
+                    f"Quelle: {meta.get('source', 'N/A')}\n"
+                    f"Überschrift: {meta.get('heading', 'N/A')}\n"
                     f"Monat: {meta.get('month', 'N/A')}\n"
                     f"Typ: {meta.get('type', 'N/A')}\n"
                     f"Inhalt:\n{doc}\n"

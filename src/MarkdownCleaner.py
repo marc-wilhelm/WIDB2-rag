@@ -11,8 +11,9 @@ class MarkdownCleaner:
     Erwartet: # Einleitung + 4x ## Monatsüberschriften
     """
 
-    def __init__(self, markdown_path: str):
+    def __init__(self, markdown_path: str,source_identifier: str = 'markdown'):
         self.markdown_path = markdown_path
+        self.source_identifier = source_identifier #Eindeutige Kennzeichnung der Quelle (um welche Markdown-Datei es sich handelt)
         self.raw_text = ""
         self.cleaned_paragraphs = []
 
@@ -89,7 +90,7 @@ class MarkdownCleaner:
                     'heading': heading,
                     'month': month,
                     'text': text,
-                    'source': 'markdown'
+                    'source': self.source_identifier #Variable zur Quelle
                 })
                 paragraph_id += 1
 
@@ -100,3 +101,54 @@ class MarkdownCleaner:
         if not self.cleaned_paragraphs:
             self.clean_and_structure()
         return self.cleaned_paragraphs
+    
+
+
+# Zusätzliche Klasse MultiMarkdwonCleaner
+class MultiMarkdownCleaner:
+    """
+    Verarbeitet mehrere Markdown-Dateien und kombiniert die Ergebnisse.
+    """
+    
+    def __init__(self, markdown_configs: List[Dict[str, str]]):
+        """
+        Args:
+            markdown_configs: Liste von Dicts mit 'path' und 'source_id'
+                Beispiel: [
+                    {'path': 'file1.md', 'source_id': 'finance'},
+                    {'path': 'file2.md', 'source_id': 'digital_solutions'}
+                ]
+        """
+        self.markdown_configs = markdown_configs
+        self.cleaners = []
+        self.all_paragraphs = []
+
+    def process_all(self) -> List[Dict[str, str]]:
+        """
+        Verarbeitet alle Markdown-Dateien und kombiniert die Ergebnisse.
+        Fügt eine globale paragraph_id hinzu, die über alle Dokumente eindeutig ist.
+        """
+        global_paragraph_id = 0
+        
+        for config in self.markdown_configs:
+            cleaner = MarkdownCleaner(
+                markdown_path=config['path'],
+                source_identifier=config['source_id']
+            )
+            
+            paragraphs = cleaner.get_cleaned_data()
+
+            # Aktualisiere die paragraph_ids für globale Eindeutigkeit
+            for paragraph in paragraphs:
+                paragraph['paragraph_id'] = global_paragraph_id
+                paragraph['original_paragraph_id'] = paragraph['paragraph_id']
+                global_paragraph_id += 1
+                
+            self.all_paragraphs.extend(paragraphs)
+            self.cleaners.append(cleaner)
+            
+        return self.all_paragraphs
+    
+    def get_paragraphs_by_source(self, source_id: str) -> List[Dict[str, str]]:
+        """Filtert Paragraphen nach Quellen-ID."""
+        return [p for p in self.all_paragraphs if p['source'] == source_id]

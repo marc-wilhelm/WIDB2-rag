@@ -9,8 +9,8 @@ load_dotenv()
 # ============================================================================
 PROJECT_ROOT = Path(__file__).parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
-MARKDOWN_FILE = DATA_DIR / "bericht.md"
-
+MARKDOWN_FILE_HT = DATA_DIR / "Geschäftsentwicklung_HomeTech.md"
+MARKDOWN_FILE_DS = DATA_DIR / "Geschäftsentwicklung_DigitalSolutions.md"
 # ============================================================================
 # API-KEYS
 # ============================================================================
@@ -34,6 +34,6 @@ CLAUDE_MAX_TOKENS = 2048
 CLAUDE_TEMPERATURE = 0.1
 
 # Retrieval
-RAG_N_RESULTS = 5  # Anzahl der abzurufenden Chunks
+RAG_N_RESULTS = 10  # Anzahl der abzurufenden Chunks
 CHUNK_SIZE = 500
 CHUNK_OVERLAP = 50
