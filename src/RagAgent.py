@@ -51,7 +51,8 @@ class RAGAgent:
                 # Formatiere jedes Dokument mit seinen Metadaten
                 context_parts.append(
                     f"[Dokument {i + 1}]\n"
-                    f"Quelle: {meta.get('heading', 'N/A')}\n"
+                    f"Quelle: {meta.get('source', 'N/A')}\n"
+                    f"Überschrift: {meta.get('heading', 'N/A')}\n"
                     f"Monat: {meta.get('month', 'N/A')}\n"
                     f"Typ: {meta.get('type', 'N/A')}\n"
                     f"Inhalt:\n{doc}\n"
@@ -83,17 +84,7 @@ class RAGAgent:
         context = self.create_context_prompt(user_question, n_results)
 
         # 2. System-Prompt definieren (gibt Claude Anweisungen)
-        system_prompt = """Du bist ein hilfreicher Assistent für Controlling-Analysen.
-
-        Deine Aufgabe ist es, Fragen zu Controlling-Berichten präzise zu beantworten.
-        Du erhältst relevante Textabschnitte aus den Berichten als Kontext.
-
-        WICHTIGE REGELN:
-        - Beantworte NUR basierend auf den bereitgestellten Dokumenten
-        - Wenn die Antwort nicht in den Dokumenten steht, sage das klar
-        - Zitiere die Quelle (Monat/Überschrift) bei deiner Antwort
-        - Sei präzise und faktenbasiert
-        - Antworte auf Deutsch"""
+        system_prompt = config.SYSTEM_PROMPT
 
         # 3. User-Prompt erstellen (kombiniert Kontext + Frage)
         user_prompt = f"""Hier sind die relevanten Dokumente:

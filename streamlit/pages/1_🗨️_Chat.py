@@ -9,7 +9,7 @@ project_root = current_file.parent.parent.parent  # Zwei Ebenen hoch = Root
 src_path = project_root / "src"
 sys.path.insert(0, str(src_path))
 
-from MarkdownCleaner import MarkdownCleaner
+from MarkdownCleaner import MultiMarkdownCleaner
 from VectoreStoreManager import VectorStoreManager
 from RagAgent import RAGAgent
 import config
@@ -25,15 +25,46 @@ st.set_page_config(
     page_icon="🤖"
 )
 
-st.title("🤖 RAG Chatbot für BWA-Analyse")
+st.title("RAG-Chatbot für BWA")
 st.markdown("Stelle Fragen zu den Controlling-Berichten und erhalte präzise Antworten basierend auf den Dokumenten.")
 
+st.markdown("---")
 
-# Initialisierung des RAG-Systems (nur einmal beim ersten Laden)
+# Beispiel-Fragen
+st.markdown("### 💡 Beispiel-Fragen")
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.markdown("""
+    **Allgemeine Fragen:**
+    - Welche Monate werden in den Berichten von Home Tech behandelt?
+    - Gib mir eine Übersicht über die Berichte
+    """)
+
+with col2:
+    st.markdown("""
+    **Spezifische Analysen:**
+    - Wie waren die Umsatzerlöse im Januar 2023 von Digital Solutions?
+    - In welchem Monat war das Betriebsergebnis von Home Tech am höchsten?
+    """)
+
+with col3:
+    st.markdown("""
+    **Vergleiche:**
+    - Wie entwickelten sich die Kosten von Home Tech im Vergleich zu Digital Solutions über die Monate?
+    - Welche Faktoren beeinflussten das Ergebnis von Home Tech und Digital Solutions?
+    """)
+
+st.markdown("---")
+
+
+# Initialisierung des RAG-Systems
 @st.cache_resource
 def initialize_rag_system():
     """
-    Initialisiert das RAG-System (wird nur einmal ausgeführt und dann gecacht).
+    Lädt das bestehende RAG-System.
+    Erstellt KEINE neue Datenbank - dafür init.py verwenden!
     """
     try:
         # API-Key laden
@@ -42,43 +73,87 @@ def initialize_rag_system():
             st.error("❌ ANTHROPIC_API_KEY nicht in .env gefunden!")
             st.stop()
 
-        # Pfade (relativ zum Projekt-Root)
-        markdown_file = config.MARKDOWN_FILE
+        # Pfade
+        db_path = config.CHROMA_DB_PATH
 
-        if not markdown_file.exists():
-            st.error(f"❌ Markdown-Datei nicht gefunden: {markdown_file}")
+        # Prüfe ob DB existiert
+        if not db_path.exists():
+            st.error("❌ Keine Datenbank gefunden!")
+            st.info("💡 Bitte führe zuerst `python src/init.py` aus, um die Datenbank zu erstellen.")
             st.stop()
 
-        with st.spinner("🔄 Initialisiere RAG-System..."):
-            # 1. Markdown verarbeiten
-            cleaner = MarkdownCleaner(markdown_path=str(markdown_file))
-            cleaned_data = cleaner.get_cleaned_data()
+        with st.spinner("🔄 Lade RAG-System..."):
+            # Bestehende DB laden
+            vector_store = VectorStoreManager(
+                db_path=config.CHROMA_DB_PATH,
+                collection_name="controlling_berichte"
+            )
 
-            # 2. Vektordatenbank initialisieren
-            vector_store = VectorStoreManager()
-            vector_store.ingest_markdown_data(cleaned_data)
+            # Anzahl der Chunks ermitteln
+            collection = vector_store.collection
+            num_chunks = collection.count()
 
-            # 3. RAG-Agent initialisieren
+            # RAG-Agent initialisieren
             rag_agent = RAGAgent(
                 vector_store=vector_store,
                 api_key=api_key
             )
 
-            return rag_agent, len(cleaned_data)
+            return rag_agent, num_chunks
 
     except Exception as e:
-        st.error(f"❌ Fehler bei der Initialisierung: {e}")
-        st.exception(e)  # Zeigt den vollständigen Fehler
+        st.error(f"❌ Fehler beim Laden: {e}")
+        st.exception(e)
         st.stop()
 
+# Sidebar-Kontrollen für DB-Verwaltung
+with st.sidebar:
+    st.markdown("### 🗄️ Datenbank-Verwaltung")
+
+    # Prüfe ob DB existiert
+    db_exists = config.CHROMA_DB_PATH.exists()
+    if db_exists:
+        st.success("✅ Datenbank vorhanden")
+
+        # Button zum Löschen der DB
+        st.markdown("---")
+        st.markdown("#### 🗑️ Datenbank zurücksetzen")
+        st.warning("⚠️ Dies löscht die gesamte Vektordatenbank!")
+
+        if st.button("🗑️ DB löschen und App stoppen", type="secondary"):
+            import shutil
+
+            try:
+                # Versuche DB zu löschen
+                shutil.rmtree(config.CHROMA_DB_PATH)
+                st.success("✅ Datenbank gelöscht!")
+                st.info("ℹ️ **Nächste Schritte:**")
+                st.code("python src/init.py", language="bash")
+                st.info("Danach starte die App neu.")
+                st.stop()
+            except Exception as e:
+                st.error(f"❌ Fehler beim Löschen: {e}")
+                st.error("💡 **Manuelle Lösung:**")
+                st.markdown("1. Stoppe die App (Strg+C im Terminal)")
+                st.markdown(f"2. Lösche manuell: `{config.CHROMA_DB_PATH}`")
+                st.markdown("3. Führe aus: `python src/init.py`")
+                st.markdown("4. Starte App neu: `streamlit run streamlit/Home.py`")
+                st.stop()
+    else:
+        st.error("❌ Keine Datenbank gefunden")
+        st.info("💡 **Datenbank erstellen:**")
+        st.code("python src/init.py", language="bash")
+        st.stop()
+
+    st.markdown("---")
 
 # RAG-System laden
-rag_agent, num_documents = initialize_rag_system()
+rag_agent, num_chunks = initialize_rag_system()
 
 # Erfolgreiche Initialisierung anzeigen
 with st.sidebar:
     st.success("✅ RAG-System bereit")
-    st.info(f"📄 {num_documents} Chunks geladen")
+    st.info(f"📄 {num_chunks} Chunks geladen")
     st.markdown("---")
     st.markdown("### ℹ️ Hinweise")
     st.markdown("""

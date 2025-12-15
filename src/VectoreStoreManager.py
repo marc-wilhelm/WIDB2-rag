@@ -48,13 +48,13 @@ class VectorStoreManager:
             month_value = paragraph['month'] if paragraph['month'] is not None else ""
 
             metadatas.append({
-                'source': 'markdown',
+                'source': paragraph['source'],
                 'heading': paragraph['heading'],
                 'month': month_value,
                 'type': paragraph['type']
             })
 
-            ids.append(f"md_para_{paragraph['paragraph_id']}")
+            ids.append(f"{paragraph['source']}_para_{paragraph['paragraph_id']}")
 
         if not documents:
             print("Keine gültigen Text-Dokumente zum Speichern gefunden.")

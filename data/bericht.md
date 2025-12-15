@@ -1,8 +1,8 @@
-# Analyse der monatlichen Schwankungen des Betriebsergebnisses in 2023
+# Analyse der monatlichen Schwankungen des Betriebsergebnisses der Business Unit Home Tech in 2023
 
 ## Einleitung
 
-Die vorliegende Analyse der monatlichen Schwankungen des Betriebsergebnisses im Zeitraum 2023/2024 zeigt, dass verschiedene interne und externe Faktoren die Geschäftsentwicklung beeinflusst haben. Diese Analyse untersucht detailliert die Veränderungen der Umsatzerlöse, der Gesamtleistung sowie des Material- und Wareneinkaufs für jeden Monat. Ziel ist es, sowohl positive als auch negative Entwicklungen zu beleuchten und Maßnahmen zur Optimierung aufzuzeigen. Außerdem wird ein Überblick über strategische Initiativen gegeben, die zur Verbesserung der Rentabilität und zur Stärkung der Wettbewerbsfähigkeit beitragen können.
+Die vorliegende Analyse der monatlichen Schwankungen des Betriebsergebnisses in der Business Unit Home Tech im Zeitraum 2023/2024 zeigt, dass verschiedene interne und externe Faktoren die Geschäftsentwicklung beeinflusst haben. Diese Analyse untersucht detailliert die Veränderungen der Umsatzerlöse, der Gesamtleistung sowie des Material- und Wareneinkaufs für jeden Monat. Ziel ist es, sowohl positive als auch negative Entwicklungen zu beleuchten und Maßnahmen zur Optimierung aufzuzeigen. Außerdem wird ein Überblick über strategische Initiativen gegeben, die zur Verbesserung der Rentabilität und zur Stärkung der Wettbewerbsfähigkeit beitragen können.
 
 ## Januar 2023: Stabile Ausgangslage
 
