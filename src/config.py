@@ -20,9 +20,9 @@ ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 # RAG-KONFIGURATION
 # ============================================================================
 # Vektordatenbank
-CHROMA_DB_PATH = "./data/chroma_db"  # Wird im data/ Ordner erstellt
+CHROMA_DB_PATH = DATA_DIR / "chroma_db" # Wird im data/ Ordner erstellt
 CHROMA_COLLECTION_NAME = "controlling_berichte"
-CHROMA_TEST_DB_PATH = "./data/chroma_test"
+CHROMA_TEST_DB_PATH = DATA_DIR / "chroma_test"
 CHROMA_TEST_COLLECTION_NAME = "controlling_berichte_test"
 
 # Embedding
@@ -34,6 +34,6 @@ CLAUDE_MAX_TOKENS = 2048
 CLAUDE_TEMPERATURE = 0.1
 
 # Retrieval
-RAG_N_RESULTS = 10  # Anzahl der abzurufenden Chunks
+RAG_N_RESULTS = 5 # Anzahl der abzurufenden Chunks
 CHUNK_SIZE = 500
 CHUNK_OVERLAP = 50

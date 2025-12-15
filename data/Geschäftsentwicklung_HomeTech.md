@@ -19,3 +19,26 @@ Im März 2023 stabilisierten sich die Umsatzerlöse wieder auf 223.515 Euro und 
 ## April 2023: Rückläufige Entwicklung und Lieferengpässe
 
 Im April 2023 kam es erneut zu einem Rückgang der Umsatzerlöse auf 210.658 Euro. Dieser Rückgang ist hauptsächlich auf eine niedrigere Kundenfrequenz im Frühling und das Fehlen saisonaler Anreize zurückzuführen. Der Materialaufwand blieb hingegen hoch, was die Kostenstruktur weiter belastete. Verzögerungen in der Lieferkette führten zudem zu einer eingeschränkten Produktverfügbarkeit, die die Umsätze negativ beeinflusste. Diese Liefereng-pässe hatten auch zur Folge, dass die Produktionsprozesse mehrfach unterbrochen werden mussten, was zusätzliche Kosten verursachte. Außerdem war die Konkurrenzsituation im April intensiver, da viele Wettbewerber verstärkte Preisnachlässe anboten, wodurch das Unternehmen Marktanteile verlor. Eine mögliche Lösung für diese Herausforderungen wäre eine diversifizierte Lieferantenbasis sowie der Ausbau neuer Vertriebskanäle. Die Implementierung eines Frühwarnsystems für Lieferkettenstörungen könnte es zudem ermöglichen, schneller auf potenzielle Probleme zu reagieren.
+
+## Fazit: Business Unit "Home Tech" (Januar - April 2023)
+
+Die Business Unit "Home Tech" verzeichnete im Zeitraum Januar bis April 2023 eine volatile Geschäftsentwicklung mit deutlichen monatlichen Schwankungen:
+
+### Umsatzerlöse
+- **Höchster Wert:** März 2023 mit 223.515 Euro
+- **Niedrigster Wert:** April 2023 mit 210.658 Euro  
+- **Durchschnitt:** 217.248 Euro
+- **Schwankungsbreite:** 12.857 Euro (6,1%)
+
+### Betriebsergebnis
+- **Höchster Wert:** März 2023 mit 30.588 Euro
+- **Niedrigster Wert:** April 2023 mit 11.834 Euro
+- **Durchschnitt:** 20.050 Euro
+- **Schwankungsbreite:** 18.754 Euro (158,5%)
+
+### Material-/Wareneinkauf
+- **Höchster Wert:** Februar 2023 mit 102.621 Euro
+- **Niedrigster Wert:** Januar 2023 mit 98.016 Euro
+- **Durchschnitt:** 100.267 Euro
+
+Die Analyse zeigt, dass saisonale Effekte und Lieferkettenprobleme die Haupttreiber der Schwankungen waren. März erwies sich als stärkster Monat durch gezielte Verkaufsaktionen und Marketingmaßnahmen, während April durch Lieferengpässe und verstärkten Wettbewerbsdruck belastet wurde. Die hohe Volatilität des Betriebsergebnisses bei relativ stabilen Umsatzerlösen deutet auf Optimierungsbedarf in der Kostenstruktur und im Lieferkettenmanagement hin.

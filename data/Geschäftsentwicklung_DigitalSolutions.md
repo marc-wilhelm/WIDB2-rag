@@ -1,4 +1,4 @@
-#Bericht zur Geschäftsentwicklung der Business Unit „Digital Solutions“ – Januar bis April 2023
+# Bericht zur Geschäftsentwicklung der Business Unit „Digital Solutions“ – Januar bis April 2023
 
 ## Einleitung
 
@@ -29,3 +29,18 @@ Im April sanken die Umsätze auf 274.900 Euro. Längere Entscheidungsprozesse be
 Zudem nahm der Wettbewerbsdruck zu: Einige Marktteilnehmer starteten aggressive Rabattaktionen, was Preisverhandlungen erschwerte und Projektvolumen teilweise reduzierte. Verzögerungen bei einem Infrastrukturpartner behinderten außerdem die Umsetzung mehrerer Projekte, wodurch geplante Umsätze in die Folgemonate verschoben wurden.
 
 Empfehlenswert wären Maßnahmen wie die Stärkung strategischer Partnerschaften, eine breitere Lieferantenbasis für Cloud-Ressourcen sowie ein erhöhter Fokus auf margenstarke Beratungsleistungen.
+
+## Fazit: Business Unit "Digital Solutions" (Januar - April 2023)
+
+Die Business Unit "Digital Solutions" zeigte im ersten Quartal 2023 eine insgesamt positive, aber ebenfalls schwankende Entwicklung:
+
+### Umsatzerlöse
+- **Höchster Wert:** März 2023 mit 316.800 Euro
+- **Niedrigster Wert:** April 2023 mit 274.900 Euro
+- **Durchschnitt:** 296.588 Euro
+- **Schwankungsbreite:** 41.900 Euro (15,2%)
+
+### Externe Dienstleistungskosten
+- **Spitzenwert:** Februar 2023 mit 105.900 Euro (aufgrund kurzfristig benötigter Spezialisten)
+
+Die Unit startete stark in das Jahr mit 305.200 Euro im Januar, getragen von hoher Nachfrage nach Software-Abonnements und Prozessdigitalisierung. Nach einem Rückgang im Februar auf 289.450 Euro aufgrund von Projektverzögerungen folgte eine deutliche Erholung im März. Der erneute Rückgang im April auf 274.900 Euro resultierte aus längeren Entscheidungsprozessen bei Neukunden und erhöhtem Wettbewerbsdruck.

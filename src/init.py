@@ -68,7 +68,7 @@ print("\nInitialisiere Vektordatenbank...")
 
 #Nur temporär: um alte Werte aus Chroma DB zu löschen und DB neu aufzusetzen, sonst wird neues zweites Markdown-Dokument nicht in DB mit aufgenommen
 import shutil
-db_path = "./chroma_db"
+db_path = config.CHROMA_DB_PATH
 if os.path.exists(db_path):
     print(f"Lösche alte Datenbank: {db_path}")
     shutil.rmtree(db_path)
@@ -77,7 +77,7 @@ if os.path.exists(db_path):
 
 
 vector_store = VectorStoreManager(
-    db_path="./chroma_db",
+    db_path=config.CHROMA_DB_PATH,
     collection_name="controlling_berichte"
 )
 vector_store.ingest_markdown_data(cleaned_data)
