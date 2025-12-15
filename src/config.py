@@ -11,6 +11,11 @@ PROJECT_ROOT = Path(__file__).parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
 MARKDOWN_FILE_HT = DATA_DIR / "Geschäftsentwicklung_HomeTech.md"
 MARKDOWN_FILE_DS = DATA_DIR / "Geschäftsentwicklung_DigitalSolutions.md"
+SYSTEM_PROMPT_FILE = DATA_DIR / "system_prompt.txt"
+
+# Hier wird SYSTEM_PROMPT erstellt
+with open(SYSTEM_PROMPT_FILE, 'r', encoding='utf-8') as f:
+    SYSTEM_PROMPT = f.read()
 # ============================================================================
 # API-KEYS
 # ============================================================================
