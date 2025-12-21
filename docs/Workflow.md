@@ -6,7 +6,7 @@
 
 - Jedem Dokument wird manuell ein zusätzlicher Abschnitt „Fazit“ hinzugefügt, um eine einheitliche inhaltliche Zusammenfassung sicherzustellen und die spätere Retrieval-Qualität zu erhöhen.
 
-###1.2 Ergänzende Wissensquellen (TBD)
+### 1.2 Ergänzende Wissensquellen (TBD)
 
 - Dies beinhaltet die Integration einer FAQ-Datei mit vordefinierten, häufig gestellten Fragen und zugehörigen Antworten.
 
@@ -19,13 +19,13 @@
 
 - Ziel ist die Extraktion eines sauberen, semantisch konsistenten Rohtextes.
 
-###2.2 Segmentierung nach inhaltlichen Einheiten
+### 2.2 Segmentierung nach inhaltlichen Einheiten
 
 - Der bereinigte Text wird anhand von Überschriften und Abschnitten in kleinere, in sich geschlossene Textsegmente aufgeteilt.
 
 - Diese Segmentierung dient der späteren granularen Suche und verbessert die Relevanz der Retrieval-Ergebnisse.
 
-2.3 Anreicherung mit Metadaten
+### 2.3 Anreicherung mit Metadaten
 
 - Jeder Textabschnitt wird mit Metainformationen versehen, z. B.:
 
@@ -54,12 +54,12 @@
 
 - ChromaDB dient als performante Vektordatenbank für semantische Ähnlichkeitssuchen im RAG-System.
 
-##4. KI-Modell und Systemkonfiguration
-###4.1 Sprachmodell / KI-Agent
+## 4. KI-Modell und Systemkonfiguration
+### 4.1 Sprachmodell / KI-Agent
 
 - Eingesetzte KI-Version:
 
-	- Claude Sonnet 4: ``` claude-sonnet-4-20250514```
+	- Claude Sonnet 4: ```claude-sonnet-4-20250514```
 
 - Das Modell übernimmt die eigentliche Antwortgenerierung auf Basis der bereitgestellten Kontextinformationen.
 
