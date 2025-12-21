@@ -1,6 +1,6 @@
 # Workflow
-##1. Datenaufbereitung und Dokumentenvorbereitung
-###1.1 Umwandlung der Quelldokumente
+## 1. Datenaufbereitung und Dokumentenvorbereitung
+### 1.1 Umwandlung der Quelldokumente
 
 - PDF-Dateien werden zunächst in Markdown-Dateien (.md) konvertiert.
 
@@ -12,8 +12,8 @@
 
 - Diese FAQ soll ebenfalls als Markdown-Datei vorliegen und beim Systemstart eingelesen werden, um wiederkehrende Anfragen effizient abzudecken.
 
-##2. Textbereinigung und Strukturierung
-###2.1 Bereinigung und Extraktion des Rohtextes
+## 2. Textbereinigung und Strukturierung
+### 2.1 Bereinigung und Extraktion des Rohtextes
 
 - Die Markdown-Dateien werden bereinigt, um irrelevante Formatierungen, Artefakte oder redundante Inhalte zu entfernen.
 
@@ -37,8 +37,8 @@
 
 - Diese Metadaten ermöglichen gezieltes Filtern und kontextsensitives Retrieval.
 
-##3. Vektorisierung und Datenhaltung
-###3.1 Embedding der Textdaten
+## 3. Vektorisierung und Datenhaltung
+### 3.1 Embedding der Textdaten
 
 - Die unstrukturierten Textsegmente werden gemeinsam mit ihren Metadaten und IDs mittels eines Embedding-Modells in Vektoren überführt.
 
@@ -48,7 +48,7 @@
 
 - Dieses Modell erlaubt eine mehrsprachige semantische Repräsentation der Inhalte.
 
-###3.2 Speicherung in der Vektordatenbank
+### 3.2 Speicherung in der Vektordatenbank
 
 - Die erzeugten Vektoren werden in der ChromaDB gespeichert.
 
@@ -63,7 +63,7 @@
 
 - Das Modell übernimmt die eigentliche Antwortgenerierung auf Basis der bereitgestellten Kontextinformationen.
 
-###4.2 System-Prompt und Regeln
+### 4.2 System-Prompt und Regeln
 
 - Ein zentraler System-Prompt definiert verbindliche Regeln für den Umgang mit Quellen, z. B.:
 
@@ -73,14 +73,14 @@
 
 	- Vermeidung von Halluzinationen
 
-##5. Retrieval-Augmented Generation (RAG)
-###5.1 Verbindung von Datenbank und Sprachmodell
+## 5. Retrieval-Augmented Generation (RAG)
+### 5.1 Verbindung von Datenbank und Sprachmodell
 
 - Das RAG-System verbindet die ChromaDB-Vektordatenbank mit dem Claude-LLM.
 
 - Auf Basis einer Benutzeranfrage werden semantisch relevante Textsegmente aus der Datenbank abgerufen.
 
-###5.2 Kontextübergabe an das Sprachmodell
+### 5.2 Kontextübergabe an das Sprachmodell
 
 - Die gefilterten Textabschnitte werden gemeinsam mit der ursprünglichen Benutzeranfrage an das LLM übergeben.
 
@@ -92,8 +92,7 @@
 
 Diese Begrenzungen dienen der Kostenkontrolle, Antwortqualität und Systemstabilität.
 
-##6. Frontend und Benutzerinteraktion
-###6.1 Weboberfläche
+## 6. Frontend und Benutzerinteraktion
 
 - Das Frontend besteht aus einer mit Streamlit umgesetzten Webanwendung.
 
@@ -101,8 +100,7 @@ Diese Begrenzungen dienen der Kostenkontrolle, Antwortqualität und Systemstabil
 
 (Zugriff und konkrete Schnittstellen können hier noch spezifiziert werden.)
 
-##7. Erweiterungen und Ausblick (TBD)
-###7.1 Grafikerstellung
+## 7. Grafikerstelung (TBD)
 
 - Falls eine Benutzeranfrage explizit die Erstellung einer Grafik oder Visualisierung verlangt:
 
