@@ -176,6 +176,8 @@ desktop.ini
 # ChromaDB
 chroma_db/
 **/chroma_db/
+chroma_test/
+**/chroma_test/
 *.sqlite3
 *.sqlite3-journal
 

@@ -48,10 +48,9 @@ python -m venv .venv && source .venv/Scripts/activate && pip install -r requirem
 
 ### .env Datei erstellen
 
-Damit der Chatbot funktional ist, bitte erstelle eine `.env` datei, in der, der entsprechende API Key eingetragen wird. Zu Orientierung der Syntax siehe das `.env.
-example`.
+Damit der Chatbot funktional ist, bitte erstelle eine `.env` datei, in der, der entsprechende API Key eingetragen wird. Zu Orientierung der Syntax siehe das `.env.example`.
 
-Für mehr Hilfe siehe [Setup Doku](docs/Setup.md)
+Für mehr Hilfe siehe: [Setup Doku](docs/Setup.md).
 
 ### Streamlit
 
@@ -61,6 +60,8 @@ Um das Frontend des Chatbots zu starten, führe folgenden Befehl im Projekt-Root
 ```bash
 streamlit run streamlit/Home.py
 ```
+
+Mehr Informationen zu Streamlit sind hier zu finden: [Streamlit Doku](docs/Streamlit.md)
 
 ## Projekt Struktur
 
@@ -83,6 +84,18 @@ WIDB2-rag/
 ├── requirements.txt
 └── README.md
 ```
+
+## Dokumentation
+
+Es finden sich alle einzelenen Erklärungen in `docs/`. Hier eine kurze Übersicht:
+
+- [Setup](docs/Setup.md)
+- [Streamlit](docs/Streamlit.md)
+- [Testkonzept](docs/Testkonzept.md)
+- [Fragen-Katalog](docs/Fragen-Katalog.md)
+- [Vektordatenbanken](docs/Vektordatenbanken.md)
+- [Workflow](docs/Workflow.md)
+
 
 ## Team
 
