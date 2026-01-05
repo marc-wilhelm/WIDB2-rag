@@ -1,4 +1,4 @@
-# Schritt 5: RAG-Workflow mit interaktivem Modus
+# Skript zum erstellen der Vektordatenbank
 
 import os
 from dotenv import load_dotenv
@@ -7,11 +7,10 @@ from VectoreStoreManager import VectorStoreManager
 from RagAgent import RAGAgent
 import config
 
-# Lade .env Datei ZUERST
+# Lade .env Datei
 load_dotenv()
 
 # Konfiguration
-#MARKDOWN_FILE_PATH = str(config.MARKDOWN_FILE_HT)  # ← Geändert
 ANTHROPIC_API_KEY = config.ANTHROPIC_API_KEY
 
 # Prüfe ob API-Key geladen wurde
@@ -39,13 +38,13 @@ markdown_configs = [
 ]
 
 
-# ✅ DEBUG: Prüfe ob Dateien existieren
+# DEBUG: Prüfe ob Dateien existieren
 print("\n=== DEBUG: Dateien überprüfen ===")
 for cfg in markdown_configs:
     exists = os.path.exists(cfg['path'])
     print(f"Quelle: {cfg['source_id']}")
     print(f"Pfad: {cfg['path']}")
-    print(f"Existiert: {'✅ JA' if exists else '❌ NEIN'}")
+    print(f"Existiert: {'JA' if exists else 'NEIN'}")
     
     if exists:
         with open(cfg['path'], 'r', encoding='utf-8') as f:
@@ -56,8 +55,6 @@ for cfg in markdown_configs:
             print(f"Anzahl ## Abschnitte: {section_count}")
     print()
 
-
-
 multi_cleaner = MultiMarkdownCleaner(markdown_configs)
 cleaned_data = multi_cleaner.process_all()
 
@@ -66,7 +63,7 @@ print(f"{len(cleaned_data)} Abschnitte aus {len(markdown_configs)} Dateien verar
 # 2. Vektordatenbank initialisieren und befüllen
 print("\nInitialisiere Vektordatenbank...")
 
-#Nur temporär: um alte Werte aus Chroma DB zu löschen und DB neu aufzusetzen, sonst wird neues zweites Markdown-Dokument nicht in DB mit aufgenommen
+# Nur temporär: um alte Werte aus Chroma DB zu löschen und DB neu aufzusetzen, sonst wird neues zweites Markdown-Dokument nicht in DB mit aufgenommen
 import shutil
 db_path = config.CHROMA_DB_PATH
 if os.path.exists(db_path):
@@ -75,11 +72,10 @@ if os.path.exists(db_path):
     print("Alte Datenbank gelöscht. Erstelle neue...")
 
 
-
 vector_store = VectorStoreManager(
     db_path=config.CHROMA_DB_PATH,
     collection_name="controlling_berichte"
 )
 vector_store.ingest_markdown_data(cleaned_data)
 
-print("Chroma DB erstellt ✅")
+print("Chroma DB erstellt.")
