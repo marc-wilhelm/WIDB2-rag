@@ -78,7 +78,7 @@ WIDB2-rag/
 ├── streamlit/                      # Frontend-Ordner
 │   └── pages/                      # Unterseiten
 │
-├── .env.example                   # Environment-Template
+├── .env.example                    # Environment-Template
 ├── .gitignore
 ├── requirements.txt
 └── README.md

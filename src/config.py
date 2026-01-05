@@ -16,6 +16,7 @@ SYSTEM_PROMPT_FILE = DATA_DIR / "system_prompt.txt"
 # Hier wird SYSTEM_PROMPT erstellt
 with open(SYSTEM_PROMPT_FILE, 'r', encoding='utf-8') as f:
     SYSTEM_PROMPT = f.read()
+
 # ============================================================================
 # API-KEYS
 # ============================================================================

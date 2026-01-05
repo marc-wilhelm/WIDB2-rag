@@ -100,7 +100,7 @@ Diese Begrenzungen dienen der Kostenkontrolle, Antwortqualität und Systemstabil
 
 (Zugriff und konkrete Schnittstellen können hier noch spezifiziert werden.)
 
-## 7. Grafikerstelung (TBD)
+## 7. Grafikerstellung (TBD)
 
 - Falls eine Benutzeranfrage explizit die Erstellung einer Grafik oder Visualisierung verlangt:
 

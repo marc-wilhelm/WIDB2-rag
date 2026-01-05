@@ -128,7 +128,7 @@ with st.sidebar:
                 shutil.rmtree(config.CHROMA_DB_PATH)
                 st.success("✅ Datenbank gelöscht!")
                 st.info("ℹ️ **Nächste Schritte:**")
-                st.code("python src/init.py", language="bash")
+                st.code("python src/init_db.py", language="bash")
                 st.info("Danach starte die App neu.")
                 st.stop()
             except Exception as e:
@@ -136,13 +136,13 @@ with st.sidebar:
                 st.error("💡 **Manuelle Lösung:**")
                 st.markdown("1. Stoppe die App (Strg+C im Terminal)")
                 st.markdown(f"2. Lösche manuell: `{config.CHROMA_DB_PATH}`")
-                st.markdown("3. Führe aus: `python src/init.py`")
+                st.markdown("3. Führe aus: `python src/init_db.py`")
                 st.markdown("4. Starte App neu: `streamlit run streamlit/Home.py`")
                 st.stop()
     else:
         st.error("❌ Keine Datenbank gefunden")
         st.info("💡 **Datenbank erstellen:**")
-        st.code("python src/init.py", language="bash")
+        st.code("python src/init_db.py", language="bash")
         st.stop()
 
     st.markdown("---")
