@@ -1,9 +1,10 @@
 # Schritt 4: RAG-Agent mit Claude API
 
-from typing import List, Dict
+from typing import List, Dict, Optional
 import anthropic
 from VectoreStoreManager import VectorStoreManager
 import config
+
 
 class RAGAgent:
     """
@@ -64,10 +65,35 @@ class RAGAgent:
 
         return "\n".join(context_parts)
 
+    def format_chat_history(self, chat_history: List[Dict]) -> str:
+        """
+        Formatiert die Chat-History für den Prompt.
+
+        Args:
+            chat_history: Liste von Nachrichten mit 'role' und 'content'
+
+        Returns:
+            Formatierter Chat-Verlauf als String
+        """
+        if not chat_history:
+            return ""
+
+        history_parts = ["Bisheriger Chat-Verlauf:"]
+
+        for msg in chat_history:
+            role = "Benutzer" if msg['role'] == 'user' else "Assistent"
+            history_parts.append(f"[{role}]: {msg['content']}")
+
+        history_parts.append("\n--- Ende des Chat-Verlaufs ---\n")
+
+        return "\n".join(history_parts)
+
     def query(self, user_question: str,
-          n_results: int = config.RAG_N_RESULTS,
-          max_tokens: int = config.CLAUDE_MAX_TOKENS,
-          model: str = config.CLAUDE_MODEL) -> str:
+              n_results: int = config.RAG_N_RESULTS,
+              max_tokens: int = config.CLAUDE_MAX_TOKENS,
+              model: str = config.CLAUDE_MODEL,
+              mode: str = "single",
+              chat_history: Optional[List[Dict]] = None) -> str:
         """
         Hauptmethode: Beantwortet eine Benutzerfrage mit RAG.
 
@@ -75,6 +101,9 @@ class RAGAgent:
             user_question: Die Frage des Benutzers
             n_results: Anzahl der Dokumente für den Kontext
             max_tokens: Maximale Länge der Antwort
+            model: Claude-Modell
+            mode: "single" (ohne Chat-History) oder "multi" (mit Chat-History)
+            chat_history: Optional - Liste der bisherigen Nachrichten für Kontext
 
         Returns:
             Die generierte Antwort von Claude
@@ -86,19 +115,31 @@ class RAGAgent:
         # 2. System-Prompt definieren (gibt Claude Anweisungen)
         system_prompt = config.SYSTEM_PROMPT
 
-        # 3. User-Prompt erstellen (kombiniert Kontext + Frage)
-        user_prompt = f"""Hier sind die relevanten Dokumente:
+        # 3. User-Prompt erstellen (kombiniert Chat-History + Kontext + Frage)
+        user_prompt_parts = []
 
-        {context}
+        # Chat-History hinzufügen nur im "multi" Modus
+        if mode == "multi" and chat_history:
+            history_text = self.format_chat_history(chat_history)
+            user_prompt_parts.append(history_text)
 
-        Benutzerfrage: {user_question}
+        # Dokumente hinzufügen
+        user_prompt_parts.append(f"Hier sind die relevanten Dokumente:\n\n{context}")
 
-        Bitte beantworte die Frage basierend auf den obigen Dokumenten."""
+        # Aktuelle Frage hinzufügen
+        if mode == "multi":
+            user_prompt_parts.append(f"\nAktuelle Benutzerfrage: {user_question}")
+            user_prompt_parts.append("\nBitte beantworte die aktuelle Frage basierend auf den obigen Dokumenten und dem Chat-Verlauf.")
+        else:
+            user_prompt_parts.append(f"\nBenutzerfrage: {user_question}")
+            user_prompt_parts.append("\nBitte beantworte die Frage basierend auf den obigen Dokumenten.")
+
+        user_prompt = "\n\n".join(user_prompt_parts)
 
         # 4. Claude API aufrufen
         try:
             message = self.client.messages.create(
-                model=model,  # Aktuelles Sonnet-Modell
+                model=model,
                 max_tokens=max_tokens,
                 system=system_prompt,
                 messages=[{"role": "user", "content": user_prompt}]

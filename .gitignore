@@ -178,6 +178,7 @@ chroma_db/
 **/chroma_db/
 chroma_test/
 **/chroma_test/
+chroma_**
 *.sqlite3
 *.sqlite3-journal
 

@@ -20,39 +20,23 @@ Nicht getestet werden die externe Claude API selbst, das Streamlit-Frontend sowi
 
 ## Testergebnisse
 
-Die Test-Suite umfasst 687 Zeilen Testcode in 4 Dateien. Alle 32 Tests laufen erfolgreich durch.
+Die Test-Suite umfasst ca. 700 Zeilen Testcode in 4 Dateien. Alle 41 Tests laufen erfolgreich durch.
 
 <div align="center">
 
 ```
 ================================ test session starts =================================
-collected 32 items
+collected 41 items
 
-src/tests/unit/test_markdown_cleaner.py ................            [ 50%]
-src/tests/unit/test_rag_agent.py .....                              [ 65%]
-src/tests/integration/test_integration_vector_store.py .......      [ 87%]
-src/tests/integration/test_integration_rag_pipeline.py ......       [100%]
-
-================================ 32 passed in 28.92s =================================
-```
-
-</div>
-
-### Coverage-Bericht
-
-<div align="center">
-
-```
 Name                                    Stmts   Miss  Cover
 -------------------------------------------------------------
 src/MarkdownCleaner.py                     63      0   100%
-src/RagAgent.py                            33      0   100%
+src/RagAgent.py                            52      0   100%
 src/VectoreStoreManager.py                 42      7    83%
-src/config.py                              23      0   100%
-src/init_db.py                             41     41     0%
-src/init_interactive.py                    53     53     0%
 -------------------------------------------------------------
-TOTAL                                     653    109    83%
+TOTAL                                     806    134    83%
+
+================================ 41 passed in 26.59s =================================
 ```
 
 </div>

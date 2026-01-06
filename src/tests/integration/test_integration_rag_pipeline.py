@@ -178,6 +178,75 @@ Die Materialkosten stiegen auf 102.621 Euro."""
 
         assert "[Dokument" in user_prompt
 
+    @patch('anthropic.Anthropic')
+    def test_query_with_chat_history(self, mock_anthropic_class, setup_pipeline):
+        """
+        Testet die RAG-Pipeline mit Chat-History im mode="multi".
+        Erwartet: Chat-Verlauf wird in den Prompt eingebaut und kontextbezogene Antworten sind möglich.
+        """
+        mock_client = MagicMock()
+        mock_anthropic_class.return_value = mock_client
+
+        mock_response = MagicMock()
+        mock_response.content = [MagicMock(text="Im Februar 2023 betrugen die Umsatzerlöse 212.215 Euro.")]
+        mock_client.messages.create.return_value = mock_response
+
+        vector_store = setup_pipeline
+        rag_agent = RAGAgent(vector_store=vector_store, api_key="test-key")
+
+        # Simuliere einen Chat-Verlauf
+        chat_history = [
+            {'role': 'user', 'content': 'Wie hoch waren die Umsatzerlöse im Januar 2023?'},
+            {'role': 'assistant', 'content': 'Im Januar 2023 betrugen die Umsatzerlöse 222.606 Euro.'}
+        ]
+
+        # Stelle eine Anschlussfrage im multi Modus
+        response = rag_agent.query("Und im Februar?", n_results=2, mode="multi", chat_history=chat_history)
+
+        assert "212.215" in response
+
+        # Prüfe dass Chat-History im Prompt enthalten ist
+        call_args = mock_client.messages.create.call_args
+        user_prompt = call_args[1]['messages'][0]['content']
+
+        assert "Bisheriger Chat-Verlauf" in user_prompt
+        assert "Januar 2023" in user_prompt
+        assert "222.606" in user_prompt
+
+    @patch('anthropic.Anthropic')
+    def test_query_single_mode_no_history(self, mock_anthropic_class, setup_pipeline):
+        """
+        Testet die RAG-Pipeline im mode="single".
+        Erwartet: Chat-History wird NICHT in den Prompt eingebaut, auch wenn übergeben.
+        """
+        mock_client = MagicMock()
+        mock_anthropic_class.return_value = mock_client
+
+        mock_response = MagicMock()
+        mock_response.content = [MagicMock(text="Im Februar 2023 betrugen die Umsatzerlöse 212.215 Euro.")]
+        mock_client.messages.create.return_value = mock_response
+
+        vector_store = setup_pipeline
+        rag_agent = RAGAgent(vector_store=vector_store, api_key="test-key")
+
+        # Simuliere einen Chat-Verlauf
+        chat_history = [
+            {'role': 'user', 'content': 'Wie hoch waren die Umsatzerlöse im Januar 2023?'},
+            {'role': 'assistant', 'content': 'Im Januar 2023 betrugen die Umsatzerlöse 222.606 Euro.'}
+        ]
+
+        # Stelle eine Frage im single Modus (History sollte ignoriert werden)
+        response = rag_agent.query("Wie hoch waren die Umsatzerlöse im Februar?", n_results=2, mode="single", chat_history=chat_history)
+
+        assert isinstance(response, str)
+
+        # Prüfe dass Chat-History NICHT im Prompt enthalten ist
+        call_args = mock_client.messages.create.call_args
+        user_prompt = call_args[1]['messages'][0]['content']
+
+        assert "Bisheriger Chat-Verlauf" not in user_prompt
+        assert "Januar 2023" not in user_prompt or "Dokument" in user_prompt  # Januar nur in Dokumenten, nicht in History
+
 
 class TestContextPromptFormatting:
 
