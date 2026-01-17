@@ -21,7 +21,7 @@ python src/init_db.py
 
 Um das Streamlit-Frontend lokal zu starten, führe folgenden Befehl im Terminal aus:
 ```bash
-streamlit run streamlit/Home.py
+python -m streamlit run streamlit/Home.py
 ```
 
 Nach der Ausführung öffnet sich automatisch ein Browser-Tab mit der Anwendung. Alternativ ist das Frontend auch manuell unter folgender Adresse erreichbar:

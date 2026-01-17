@@ -1,11 +1,12 @@
 import streamlit as st
 import sys
 from pathlib import Path
+import json
+
 
 # Füge src/ zum Python-Pfad hinzu
-# Von streamlit/pages/ aus: ../../src/
 current_file = Path(__file__).resolve()
-project_root = current_file.parent.parent.parent  # Zwei Ebenen hoch = Root
+project_root = current_file.parent.parent.parent
 src_path = project_root / "src"
 sys.path.insert(0, str(src_path))
 
@@ -15,8 +16,9 @@ from RagAgent import RAGAgent
 import config
 import os
 from dotenv import load_dotenv
+from Grafikplotter import grafik_plotten_dynamisch
 
-# Lade Umgebungsvariablen (aus Root-Verzeichnis)
+# Lade Umgebungsvariablen
 load_dotenv(project_root / ".env")
 
 # Seitenkonfiguration
@@ -48,9 +50,9 @@ with st.expander("💡 Beispiel-Fragen", expanded=False):
 
     with col3:
         st.markdown("""
-        **Vergleiche:**
-        - Wie entwickelten sich die Kosten von Home Tech im Vergleich zu Digital Solutions über die Monate?
-        - Welche Faktoren beeinflussten das Ergebnis von Home Tech und Digital Solutions?
+        **Vergleiche & Grafiken:**
+        - Plotte die Entwicklung der Umsatzerlöse von Home Tech
+        - Visualisiere den Vergleich der Kosten zwischen Home Tech und Digital Solutions
         """)
 
 st.markdown("---")
@@ -92,7 +94,8 @@ def initialize_rag_system():
             # RAG-Agent initialisieren
             rag_agent = RAGAgent(
                 vector_store=vector_store,
-                api_key=api_key
+                api_key=api_key,
+                plot_function=grafik_plotten_dynamisch
             )
 
             return rag_agent, num_chunks
@@ -172,9 +175,18 @@ if 'is_processing' not in st.session_state:
 # Chat-Verlauf anzeigen
 for message in st.session_state.messages:
     with st.chat_message(message['role']):
-        st.markdown(message['content'])
+        # Prüfe ob die Nachricht Plot-Daten enthält
+        if isinstance(message['content'], dict) and 'text' in message['content']:
+            st.markdown(message['content']['text'])
+            if 'plot' in message['content'] and message['content']['plot'] is not None:
+                # Grafik linksbündig mit 50% Breite
+                col1, col2 = st.columns([2, 2])
+                with col1:
+                    st.pyplot(message['content']['plot'][0])
+        else:
+            st.markdown(message['content'])
 
-# Chat-Input (disabled während Verarbeitung)
+# Chat-Input
 prompt = st.chat_input(
     'Stelle deine Frage zu den Controlling-Berichten...',
     disabled=st.session_state.is_processing
@@ -188,7 +200,7 @@ if prompt and not st.session_state.is_processing:
     # User-Nachricht speichern
     st.session_state.messages.append({'role': 'user', 'content': prompt})
 
-    # Rerun um die Nachricht aus dem Loop anzuzeigen
+    # Rerun um die Nachricht anzuzeigen
     st.rerun()
 
 # Verarbeite die letzte Nachricht wenn processing aktiv ist
@@ -199,18 +211,32 @@ if st.session_state.is_processing:
     if last_message['role'] == 'user':
         # RAG-Antwort generieren
         with st.chat_message('assistant'):
-            with st.spinner('🤔 Suche nach relevanten Informationen...'):
+            # Zeige passenden Spinner basierend auf der Anfrage
+            spinner_text = '🤔 Suche nach relevanten Informationen...'
+            if any(keyword in last_message['content'].lower() for keyword in 
+                   ['plot', 'plotte', 'grafik', 'visualisier', 'chart', 'diagramm']):
+                spinner_text = '📊 Grafik wird vorbereitet...'
+            
+            with st.spinner(spinner_text):
                 try:
                     # Chat-History vorbereiten (nur im multi Modus)
                     if chat_mode == "multi":
                         # Chat-History vorbereiten (ohne die aktuelle Frage und ohne Begrüßung)
                         chat_history = [
                             msg for msg in st.session_state.messages[:-1]  # Aktuelle Frage ausschließen
-                            if not (msg['role'] == 'assistant' and 'Hallo!' in msg['content'])  # Begrüßung ausschließen
+                            if not (msg['role'] == 'assistant' and 
+                                   isinstance(msg['content'], str) and 
+                                   'Hallo!' in msg['content'])  # Begrüßung ausschließen
+                        ]
+                        # Extrahiere nur den Text-Content
+                        chat_history = [
+                            {'role': msg['role'], 
+                             'content': msg['content']['text'] if isinstance(msg['content'], dict) else msg['content']}
+                            for msg in chat_history
                         ]
                     else:
                         chat_history = None
-
+                    
                     # RAG-Query ausführen mit Modus
                     response = rag_agent.query(
                         last_message['content'],
@@ -219,15 +245,40 @@ if st.session_state.is_processing:
                         mode=chat_mode,
                         chat_history=chat_history
                     )
-
-                    # Antwort speichern
-                    st.session_state.messages.append({
-                        'role': 'assistant',
-                        'content': response
-                    })
+                    
+                    # Response ist jetzt immer ein Dictionary
+                    answer_text = response['answer']
+                    plot_created = response['plot_created']
+                    plot_result = response['plot_result']
+                    
+                    # Zeige die Antwort
+                    st.markdown(answer_text)
+                    
+                    # Zeige Plot falls vorhanden
+                    if plot_created and plot_result is not None:
+                        col1, col2 = st.columns([2,2])
+                        with col1:
+                            fig, ax = plot_result  # Tuple auspacken
+                            st.pyplot(fig)
+                        
+                        # Speichere mit Plot-Daten
+                        st.session_state.messages.append({
+                            'role': 'assistant',
+                            'content': {
+                                'text': answer_text,
+                                'plot': plot_result
+                            }
+                        })
+                    else:
+                        # Speichere nur Text
+                        st.session_state.messages.append({
+                            'role': 'assistant',
+                            'content': answer_text
+                        })
 
                 except Exception as e:
                     error_msg = f"❌ Fehler bei der Anfrage: {e}"
+                    st.error(error_msg)
                     st.exception(e)
                     st.session_state.messages.append({
                         'role': 'assistant',
