@@ -6,7 +6,7 @@ Dieser Bericht analysiert die wirtschaftliche Entwicklung der Business Unit „D
 
 ## Januar 2023: Starker Start durch hohe Nachfrage
 
-Im Januar erzielte die Business Unit Umsatzerlöse von 305.200 Euro und damit einen starken Jahresauftakt. Die Nachfrage nach Software-Abonnements sowie Dienstleistungen im Bereich Prozessdigitalisierung übertraf die Erwartungen. Die Gesamtleistung von 309.000 Euro profitierte von einer guten Auslastung und einer insgesamt moderaten Kostenbasis.
+Im Januar erzielte die Business Unit Umsatzerlöse von 305.200 Euro und damit einen starken Jahresauftakt. Die Nachfrage nach Software-Abonnements sowie Dienstleistungen im Bereich Prozessdigitalisierung übertraf die Erwartungen.
 
 Optimierte interne Abläufe ermöglichten einen effizienten Einsatz der Ressourcen, wodurch der Aufwand für externe Dienstleistungen vergleichsweise niedrig blieb. Die Kundenprojekte liefen planmäßig, und insbesondere Bestandskunden sorgten für stabile, wiederkehrende Erlöse. Insgesamt bot der Januar eine solide Grundlage für das weitere Geschäftsjahr.
 
@@ -34,7 +34,15 @@ Empfehlenswert wären Maßnahmen wie die Stärkung strategischer Partnerschaften
 
 Die Business Unit "Digital Solutions" zeigte im ersten Quartal 2023 eine insgesamt positive, aber ebenfalls schwankende Entwicklung:
 
-### Umsatzerlöse
+
+### Umsatzerlöse pro Monat
+### Umsatzerlöse pro Monat
+- **Januar**: 305.200 Euro
+- **Februar**: 289.450 Euro
+- **März**: 316.800 Euro
+- **April**: 274.900 Euro
+
+### Umsatzerlöse Überblick
 - **Höchster Wert:** März 2023 mit 316.800 Euro
 - **Niedrigster Wert:** April 2023 mit 274.900 Euro
 - **Durchschnitt:** 296.588 Euro

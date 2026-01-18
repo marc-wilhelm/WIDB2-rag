@@ -52,7 +52,7 @@
 
 
 11. Wie hoch war der niedrigste Umsatz bei Digital Solutions im ersten Quartal 2023?  
-**Erwartete Antwort:**<br>April 2023 mit 274.900 Euro
+**Erwartete Antwort:**<br> Februar 2023 mit 289.450 Euro (nur die ersten 3 Monate)
 
 ### Mittel (Vergleich/Trend)
 
@@ -65,7 +65,7 @@
 
 
 14. Was war die durchschnittliche Umsatzleistung von Digital Solutions im ersten Quartal 2023?  
-**Erwartete Antwort:**<br>Der Durchschnitt lag bei 296.588 Euro mit einer Schwankungsbreite von 41.900 Euro (15,2%).
+**Erwartete Antwort:**<br>Der Durchschnitt lag bei 303.817 Euro mit einer Schwankungsbreite von 27.350 Euro.
 
 ### Komplex (Ursachen/Zusammenhänge)
 
@@ -105,3 +105,8 @@
 
 22. Welche Unit startete stärker ins Jahr und wie entwickelten sich beide im Vergleich?  
 **Erwartete Antwort:**<br>Digital Solutions startete deutlich stärker mit 305.200 Euro im Januar gegenüber HomeTech mit 222.606 Euro. Beide Units zeigten im März ihren Höchstwert (HomeTech: 223.515 Euro, Digital Solutions: 316.800 Euro) und sanken im April auf Jahrestiefstwerte (HomeTech: 210.658 Euro, Digital Solutions: 274.900 Euro). Während HomeTech hauptsächlich unter saisonalen und logistischen Faktoren litt, waren bei Digital Solutions projektspezifische und wettbewerbsbedingte Faktoren ausschlaggebend.
+
+## Testfragen - Grafiken
+
+Erstelle mir eine Grafik zu den Umsatzerlösen von Digital Solutions und Home Tech über alle 4 Monate hinweg in einem Diagram
+
