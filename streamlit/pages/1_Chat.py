@@ -23,8 +23,9 @@ load_dotenv(project_root / ".env")
 
 # Seitenkonfiguration
 st.set_page_config(
-    page_title="WIDB2 - RAG Chatbot",
-    page_icon="🤖"
+    page_title="RAG Chatbot",
+    page_icon="🤖",
+    layout="centered"
 )
 
 st.title("RAG-Chatbot für BWA")

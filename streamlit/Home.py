@@ -2,7 +2,7 @@ import streamlit as st
 
 # Seitenkonfiguration
 st.set_page_config(
-    page_title="RAG-Chatbot für BWA",
+    page_title="RAG-Chatbot",
     page_icon="🤖",
     layout="wide"
 )
@@ -36,7 +36,7 @@ with col1:
     ### 📊 Verfügbare Daten:
 
     - Bericht zur Geschäftsentwicklung der Business Unit „Digital Solutions“ – Januar bis April 2023
-    - Analyse der monatlichen Schwankungen des Betriebsergebnisses der Business Unit Home Tech in 2023
+    - Analyse der monatlichen Schwankungen des Betriebsergebnisses der Business Unit "Home Tech" in 2023
     """)
 
 st.markdown("---")
