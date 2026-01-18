@@ -12,3 +12,5 @@ anthropic==0.75.0
 sqlalchemy==2.0.45
 pytest==9.0.2
 pytest-cov==7.0.0
+matplotlib==3.10.8
+ipython==9.9.0
