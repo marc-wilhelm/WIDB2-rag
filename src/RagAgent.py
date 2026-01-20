@@ -252,8 +252,7 @@ class RAGAgent:
             user_prompt_parts.append("\nBitte beantworte die Frage basierend auf den obigen Dokumenten.")
 
 
-        #SPOTLIGHT: Neuer Prompt Abschnitt der versucht der KI weiter die Regeln zur Quellenangabe nahezubringen
-        #Ich glaube es hilft, aber ich bin auch sau müde
+     
         if not self._should_create_plot(user_question):
             user_prompt_parts.append(f"""\n\nFür die Quellen und die Zitierung gibt es zuletzt nocheinmal eine kleine Vergleichsbasis, um die Genauigkeit 
                                  und Relevanz dieser zu prüfen.\n Mit dieser Liste von Dictionaries {self._quellen_phrasing(user_question,context)} 
@@ -378,8 +377,7 @@ Sei freundlich und hilfsbereit."""
                     )
                     self.result['answer'] = no_data_message.content[0].text
                     
-             #SPOTLIGHT: Beim Plotten kommt immer erstmal eine Wall of Text 
-             #bevor die Grafik erscheint - muss noch getestet werden, ob jetzt weg        
+             
             return self.result
         
         except Exception as e:
@@ -397,7 +395,7 @@ Sei freundlich und hilfsbereit."""
         ]
         return any(keyword in query.lower() for keyword in plot_keywords)
 
-    #SPOTLIGHT: Alte funktion umgeschrieben.
+    
     def _extract_helper(self,*query: str) -> List[str]:
             # --- Hilfskonstanten ---
             GERMAN_MONTHS = ["januar", "februar", "märz", "april", "mai", "juni", "juli", "august", "september", "oktober", "november", "dezember"]

@@ -51,7 +51,7 @@ with st.expander("💡 Beispiel-Fragen", expanded=False):
     with col3:
         st.markdown("""
         **Vergleiche & Grafiken:**
-        - Plotte die Entwicklung der Umsatzerlöse von Home Tech
+        - Plotte die Dienstleistungskosten der Digital Solutions Unit
         - Visualisiere den Vergleich der Umsatzerlöse zwischen Home Tech und Digital Solutions
         """)
 
