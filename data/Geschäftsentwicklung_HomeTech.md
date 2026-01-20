@@ -25,7 +25,6 @@ Im April 2023 kam es erneut zu einem Rückgang der Umsatzerlöse auf 210.658 Eur
 Die Business Unit "Home Tech" verzeichnete im Zeitraum Januar bis April 2023 eine volatile Geschäftsentwicklung mit deutlichen monatlichen Schwankungen:
 
 ### Umsatzerlöse pro Monat
-### Umsatzerlöse pro Monat
 - **Januar**: 222.606 Euro
 - **Februar**: 212.215 Euro
 - **März**: 223.515 Euro

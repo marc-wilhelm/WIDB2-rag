@@ -34,8 +34,6 @@ Empfehlenswert wären Maßnahmen wie die Stärkung strategischer Partnerschaften
 
 Die Business Unit "Digital Solutions" zeigte im ersten Quartal 2023 eine insgesamt positive, aber ebenfalls schwankende Entwicklung:
 
-
-### Umsatzerlöse pro Monat
 ### Umsatzerlöse pro Monat
 - **Januar**: 305.200 Euro
 - **Februar**: 289.450 Euro
