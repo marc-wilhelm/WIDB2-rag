@@ -41,5 +41,5 @@ CLAUDE_TEMPERATURE = 0.1
 
 # Retrieval
 RAG_N_RESULTS = 5 # Anzahl der abzurufenden Chunks
-CHUNK_SIZE = 4000
+CHUNK_SIZE = 500
 CHUNK_OVERLAP = 50
