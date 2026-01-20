@@ -45,6 +45,29 @@ class RAGAgent:
         # 1. Relevante Dokumente aus der Vektordatenbank abrufen
         results = self.vector_store.query_vector_db(query, n_results=n_results)
 
+        # Detaillierte Retrieval-Info
+        print(f"\n{'=' * 80}")
+        print(f"🔍 RETRIEVAL RESULTS (Top {n_results})")
+        print(f"{'=' * 80}")
+        print(f"Query: {query}")
+
+        if results and 'documents' in results and results['documents']:
+            print(f"Gefundene Dokumente: {len(results['documents'][0])}")
+            print(f"{'-' * 80}")
+            for i, doc in enumerate(results['documents'][0]):
+                meta = results['metadatas'][0][i]
+                distance = results['distances'][0][i]
+                print(f"\n[Dokument {i + 1}]")
+                print(f"Quelle: {meta.get('source', 'N/A')}")
+                print(f"Überschrift: {meta.get('heading', 'N/A')}")
+                print(f"Monat: {meta.get('month', 'N/A')}")
+                print(f"Typ: {meta.get('type', 'N/A')}")
+                print(f"Relevanz-Score: {distance:.3f}")
+        else:
+            print(f"❌ Keine Dokumente gefunden")
+
+        print(f"{'=' * 80}\n")
+
         # 2. Kontext formatieren
         context_parts = []
 
