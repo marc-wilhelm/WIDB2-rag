@@ -2,7 +2,7 @@
 
 ## Teststrategie
 
-Das RAG-Projekt umfasst 586 Zeilen produktiven Code im src-Verzeichnis. Die Teststrategie konzentriert sich auf das korrekte Zusammenspiel der Systemkomponenten, da der Hauptwert in der Integration von Markdown-Verarbeitung, Vektordatenbank und RAG-Pipeline liegt.
+Das RAG-Projekt umfasst 545 Zeilen produktiven Code im src-Verzeichnis. Die Teststrategie konzentriert sich auf das korrekte Zusammenspiel der Systemkomponenten, da der Hauptwert in der Integration von Markdown-Verarbeitung, Vektordatenbank und RAG-Pipeline liegt.
 
 Ein vollständiges Test-Pyramid-Modell mit 70% Unit Tests wäre unverhältnismäßig, da die meiste Logik API-Orchestrierung und Datentransformation zwischen externen Services betrifft. Zur Erklärung des Test-Pyramid-Modells empfehlen wir den Blog-Beitrag von CircleCI [*'The testing pyramid: Strategic software testing for Agile teams'*](https://circleci.com/blog/testing-pyramid/). Stattdessen wurde ein ausgewogener Mix aus Unit Tests für isolierbare Funktionen und Integration Tests für die Systemkomponenten gewählt.
 
@@ -16,36 +16,42 @@ Die Unit Tests decken die String-Verarbeitungslogik im MarkdownCleaner ab. Dazu 
 
 Die Integration Tests validieren die vollständige Pipeline vom Markdown-Dokument über die Bereinigung und das Embedding bis zur Speicherung in ChromaDB und dem Retrieval. ChromaDB wird mit echten temporären Instanzen getestet, während die Claude API gemockt wird um Kosten zu vermeiden.
 
-Nicht getestet werden die externe Claude API selbst, das Streamlit-Frontend sowie die Script-Dateien für die Initialisierung, da diese keine testbare Business-Logik enthalten.
+Nicht getestet werden die externe Claude API selbst, das Streamlit-Frontend, der Grafikplotter sowie die Script-Dateien für die Initialisierung, da diese keine testbare Business-Logik enthalten.
 
 ## Testergebnisse
 
-Die Test-Suite umfasst ca. 700 Zeilen Testcode in 4 Dateien. Alle 41 Tests laufen erfolgreich durch.
+Die Test-Suite umfasst ca. 840 Zeilen Testcode in 4 Dateien. Alle 79 Tests laufen erfolgreich durch.
 
 <div align="center">
 
 ```
 ================================ test session starts =================================
-collected 41 items
+collected 79 items
 
 Name                                    Stmts   Miss  Cover
 -------------------------------------------------------------
+src/Grafikplotter.py                       77     71     8%
 src/MarkdownCleaner.py                     63      0   100%
-src/RagAgent.py                            52      0   100%
+src/RagAgent.py                           194      6    97%
 src/VectoreStoreManager.py                 42      7    83%
+src/config.py                              23      0   100%
+src/init_db.py                             66     66     0%
+src/init_interactive.py                    80     80     0%
 -------------------------------------------------------------
-TOTAL                                     806    134    83%
+TOTAL                                    1381    238    83%
 
-================================ 41 passed in 26.59s =================================
+================================ 79 passed in 46.16s =================================
 ```
 
 </div>
 
 ### Interpretation
 
-Die Kernmodule erreichen eine sehr gute Coverage. MarkdownCleaner und RagAgent sind vollständig abgedeckt, VectorStoreManager liegt bei 83%. Die fehlenden 17% betreffen hauptsächlich Error-Handling-Pfade die in der Praxis schwer zu testen sind.
+Die Kernmodule erreichen eine sehr gute Coverage. MarkdownCleaner und config erreichen 100%, RagAgent liegt bei 97% und VectorStoreManager bei 83%. Die fehlenden Prozentpunkte bei RagAgent und VectorStoreManager betreffen hauptsächlich Error-Handling-Pfade die in der Praxis schwer zu testen sind.
 
-Die Script-Dateien haben erwartungsgemäß 0% Coverage, da sie reine Orchestrierungslogik ohne testbare Business-Logik enthalten.
+Der Grafikplotter hat erwartungsgemäß eine niedrige Coverage von 8%, da er primär für Visualisierungszwecke verwendet wird und keinen kritischen Teil der RAG-Pipeline darstellt.
+
+Die Script-Dateien (init_db.py, init_interactive.py) haben erwartungsgemäß 0% Coverage, da sie reine Orchestrierungslogik ohne testbare Business-Logik enthalten.
 
 Die Gesamtcoverage von 83% ist für ein RAG-Projekt dieser Größenordnung sehr gut. Bei API-lastigen Systemen ist eine Coverage von 80-85% realistisch und ausreichend.
 

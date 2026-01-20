@@ -356,7 +356,7 @@ Sei freundlich und hilfsbereit."""
                     
              #SPOTLIGHT: Beim Plotten kommt immer erstmal eine Wall of Text 
              #bevor die Grafik erscheint - muss noch getestet werden, ob jetzt weg        
-            return self.result["plot_result"] 
+            return self.result
         
         except Exception as e:
             error_msg = f"Fehler bei der Claude API: {e}"
