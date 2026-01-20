@@ -40,6 +40,6 @@ CLAUDE_MAX_TOKENS = 2048
 CLAUDE_TEMPERATURE = 0.1
 
 # Retrieval
-RAG_N_RESULTS = 12 # Anzahl der abzurufenden Chunks
+RAG_N_RESULTS = 5 # Anzahl der abzurufenden Chunks
 CHUNK_SIZE = 4000
 CHUNK_OVERLAP = 50

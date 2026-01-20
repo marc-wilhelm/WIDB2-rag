@@ -25,7 +25,7 @@ load_dotenv(project_root / ".env")
 st.set_page_config(
     page_title="RAG Chatbot",
     page_icon="🤖",
-    layout="centered"
+    layout="wide"
 )
 
 st.title("RAG-Chatbot für BWA")
@@ -214,8 +214,7 @@ if st.session_state.is_processing:
         with st.chat_message('assistant'):
             # Zeige passenden Spinner basierend auf der Anfrage
             spinner_text = '🤔 Suche nach relevanten Informationen...'
-            if any(keyword in last_message['content'].lower() for keyword in 
-                   ['plot', 'plotte', 'grafik', 'visualisier', 'chart', 'diagramm']):
+            if rag_agent._should_create_plot(last_message["content"]):
                 spinner_text = '📊 Grafik wird vorbereitet...'
             
             with st.spinner(spinner_text):
@@ -253,7 +252,7 @@ if st.session_state.is_processing:
                     plot_result = response['plot_result']
                     
                     # Zeige die Antwort
-                    st.markdown(answer_text)
+                    st.markdown(response) #full on testing mode
                     
                     # Zeige Plot falls vorhanden
                     if plot_created and plot_result is not None:

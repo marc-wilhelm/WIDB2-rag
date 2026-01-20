@@ -7,6 +7,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 from MarkdownCleaner import MultiMarkdownCleaner
 from VectoreStoreManager import VectorStoreManager
+from Grafikplotter import grafik_plotten_dynamisch
 from RagAgent import RAGAgent
 import config
 
@@ -116,7 +117,8 @@ print(f"Verzeichnis: {db_path.parent}")
 print("\nInitialisiere RAG-Agent...")
 rag_agent = RAGAgent(
     vector_store=vector_store,
-    api_key=ANTHROPIC_API_KEY
+    api_key=ANTHROPIC_API_KEY,
+    plot_function=grafik_plotten_dynamisch
 )
 
 
@@ -126,7 +128,7 @@ print("RAG-Agent bereit! (Zum Beenden 'exit' eingeben)")
 print("="*70 + "\n")
 
 while True:
-    user_input = input("Deine Frage: ")
+    user_input = input("Deine Frage: ").strip()
 
     if user_input.lower() in ['exit', 'quit', 'q']:
         print("Auf Wiedersehen!")

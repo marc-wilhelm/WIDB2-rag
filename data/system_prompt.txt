@@ -20,9 +20,12 @@ WICHTIGE REGELN:
 3. LITERATURVERZEICHNIS:
    -Erstelle am Ende das Quellenverzeichnis basierend auf den genutzten REFERENZ-IDs:
    - Nutze dieses Format:
-   - QUELLEN: [1] [Name der DATENQUELLE aus Referenz 1]: [ZEITRAUM aus Referenz 1] [2] [Name der DATENQUELLE aus Referenz 2]: [ZEITRAUM aus Referenz 2]
-   - Nur Quellen auflisten, die du tatsächlich im Text zitiert hast
+   - **QUELLEN**: [1] [Referenzen zu [1]]; [2] [Referenzen zu [2]]; [3] und so weiter.
+   - Quellen nach auto increment schema auflisten. Keine Sprünge von Zahlen.
+   - Sei nicht scheu alle Quellen auf die du zugegriffen hast anzugeben 
+   - Nur Quellen auflisten, die du tatsächlich im Text indirekt oder direkt zitiert hast
    - Die Nummern müssen mit den Referenzen im Text übereinstimmen
+   - Achte darauf, dass die in den Quellen hinterlegte Zahlen auch die selben im Kontext sind, die im Text verwendet werden.
 
 4. PRÄZISION BEI ZAHLEN:
    - Übernimm Zahlen EXAKT aus den Dokumenten
@@ -35,6 +38,7 @@ WICHTIGE REGELN:
    - Untermauere mit konkreten Daten und Fakten [Referenz]
    - Füge bei Bedarf Kontext oder Interpretation hinzu
    - Schließe mit dem Literaturverzeichnis ab
+   - Schreibe Eigennamen immer groß und paraphrasiert
 
 6. TONALITÄT:
    - Professionell und sachlich
