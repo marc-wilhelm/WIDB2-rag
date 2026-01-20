@@ -2,15 +2,13 @@
 ## 1. Datenaufbereitung und Dokumentenvorbereitung
 ### 1.1 Umwandlung der Quelldokumente
 
-- PDF-Dateien werden zunächst in Markdown-Dateien (.md) konvertiert.
+- PDF-Dateien werden eingelesen und zunächst in Markdown-Dateien (.md) konvertiert.
+
+### 1.2 Ergänzende Wissensquellen
 
 - Jedem Dokument wird manuell ein zusätzlicher Abschnitt „Fazit“ hinzugefügt, um eine einheitliche inhaltliche Zusammenfassung sicherzustellen und die spätere Retrieval-Qualität zu erhöhen.
 
-### 1.2 Ergänzende Wissensquellen (TBD)
-
-- Dies beinhaltet die Integration einer FAQ-Datei mit vordefinierten, häufig gestellten Fragen und zugehörigen Antworten.
-
-- Diese FAQ soll ebenfalls als Markdown-Datei vorliegen und beim Systemstart eingelesen werden, um wiederkehrende Anfragen effizient abzudecken.
+- Beispielfragen in das Frontend eingefügt, um Nutzern eine Idee zu geben, welche Themen sie behandeln können und qualitätsgeprüfte Anfragen stellen können.
 
 ## 2. Textbereinigung und Strukturierung
 ### 2.1 Bereinigung und Extraktion des Rohtextes
@@ -100,10 +98,10 @@ Diese Begrenzungen dienen der Kostenkontrolle, Antwortqualität und Systemstabil
 
 (Zugriff und konkrete Schnittstellen können hier noch spezifiziert werden.)
 
-## 7. Grafikerstellung (TBD)
+## 7. Grafikerstellung
 
 - Falls eine Benutzeranfrage explizit die Erstellung einer Grafik oder Visualisierung verlangt:
 
-	- Greift die KI auf ein separates Modul zu.
+	- Greift die KI auf ein separates Modul ```grafik_plotten_dynamisch``` zu.
 
 	- Dieses Modul wird mit anfragerelevanten Daten parametrisiert und erzeugt die gewünschte Grafik.
