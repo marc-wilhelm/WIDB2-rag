@@ -254,7 +254,8 @@ class RAGAgent:
 
         #SPOTLIGHT: Neuer Prompt Abschnitt der versucht der KI weiter die Regeln zur Quellenangabe nahezubringen
         #Ich glaube es hilft, aber ich bin auch sau müde
-        user_prompt_parts.append(f"""\n\nFür die Quellen und die Zitierung gibt es zuletzt nocheinmal eine kleine Vergleichsbasis, um die Genauigkeit 
+        if not self._should_create_plot(user_question):
+            user_prompt_parts.append(f"""\n\nFür die Quellen und die Zitierung gibt es zuletzt nocheinmal eine kleine Vergleichsbasis, um die Genauigkeit 
                                  und Relevanz dieser zu prüfen.\n Mit dieser Liste von Dictionaries {self._quellen_phrasing(user_question,context)} 
                                  \nKannst du Anhand von angrefragten Zeiträumen, sowie Metadaten und die Wiedergabe welche Quelle(n), deren Titel etc. angegeben werden sollen
                                  prüfen. Schreibe hierbei die **Quellen** die du ausgibst Lisitenartig auf. Zähle also von eins [1] beginnend hoch. 
@@ -401,8 +402,8 @@ Sei freundlich und hilfsbereit."""
             # --- Hilfskonstanten ---
             GERMAN_MONTHS = ["januar", "februar", "märz", "april", "mai", "juni", "juli", "august", "september", "oktober", "november", "dezember"]
             BUSINESS_UNIT_KEYWORDS = {
-            "hometech": ["home tech", "hometech", "home-tech"],
-            "digital_solutions": ["digital solutions", "digital solution", "digital business", "digital_solutions"]
+            "Hometech": ["home tech", "hometech", "home-tech"],
+            "Digital Solutions": ["digital solutions", "digital solution", "digital business", "digital_solutions"]
         }
             
             units,months = [], []
@@ -425,8 +426,7 @@ Sei freundlich und hilfsbereit."""
                 
             units = list(set(units))
             months = list(set(months))
-            print(units)
-            print(months)
+           
             
             return units,months
     
@@ -468,7 +468,7 @@ ANTWORT:
 {answer}
 
 DOKUMENTE:
-{self.result['context']}
+{self.result["context"]}
 
 gefragte
 UNITS:
@@ -517,11 +517,6 @@ Gib ausschließlich das JSON zurück, ohne zusätzlichen Text oder Markdown.
                 print("⚠ labels muss 'x' und 'y' enthalten")
                 return None
             
-            # Validiere units
-            valid_units = {"Home Tech", "Digital Solutions"}
-            if not set(plot_data['units']).issubset(valid_units):
-                print(f"⚠ Ungültige units: {plot_data['units']}")
-                return None
             
             # Validiere dass Daten vorhanden sind
             if not plot_data['values']:
