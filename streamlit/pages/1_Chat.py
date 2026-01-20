@@ -3,7 +3,6 @@ import sys
 from pathlib import Path
 import json
 
-
 # Füge src/ zum Python-Pfad hinzu
 current_file = Path(__file__).resolve()
 project_root = current_file.parent.parent.parent
@@ -53,7 +52,7 @@ with st.expander("💡 Beispiel-Fragen", expanded=False):
         st.markdown("""
         **Vergleiche & Grafiken:**
         - Plotte die Entwicklung der Umsatzerlöse von Home Tech
-        - Visualisiere den Vergleich der Kosten zwischen Home Tech und Digital Solutions
+        - Visualisiere den Vergleich der Umsatzerlöse zwischen Home Tech und Digital Solutions
         """)
 
 st.markdown("---")
@@ -216,7 +215,7 @@ if st.session_state.is_processing:
             spinner_text = '🤔 Suche nach relevanten Informationen...'
             if rag_agent._should_create_plot(last_message["content"]):
                 spinner_text = '📊 Grafik wird vorbereitet...'
-            
+
             with st.spinner(spinner_text):
                 try:
                     # Chat-History vorbereiten (nur im multi Modus)
@@ -224,19 +223,19 @@ if st.session_state.is_processing:
                         # Chat-History vorbereiten (ohne die aktuelle Frage und ohne Begrüßung)
                         chat_history = [
                             msg for msg in st.session_state.messages[:-1]  # Aktuelle Frage ausschließen
-                            if not (msg['role'] == 'assistant' and 
-                                   isinstance(msg['content'], str) and 
-                                   'Hallo!' in msg['content'])  # Begrüßung ausschließen
+                            if not (msg['role'] == 'assistant' and
+                                    isinstance(msg['content'], str) and
+                                    'Hallo!' in msg['content'])  # Begrüßung ausschließen
                         ]
                         # Extrahiere nur den Text-Content
                         chat_history = [
-                            {'role': msg['role'], 
+                            {'role': msg['role'],
                              'content': msg['content']['text'] if isinstance(msg['content'], dict) else msg['content']}
                             for msg in chat_history
                         ]
                     else:
                         chat_history = None
-                    
+
                     # RAG-Query ausführen mit Modus
                     response = rag_agent.query(
                         last_message['content'],
@@ -245,22 +244,43 @@ if st.session_state.is_processing:
                         mode=chat_mode,
                         chat_history=chat_history
                     )
-                    
-                    # Response ist jetzt immer ein Dictionary
-                    answer_text = response['answer']
-                    plot_created = response['plot_created']
-                    plot_result = response['plot_result']
-                    
+
+                    # WORKAROUND: query() gibt nicht das komplette Dictionary zurück
+                    # Greife direkt auf rag_agent.result zu
+                    if hasattr(rag_agent, 'result') and isinstance(rag_agent.result, dict):
+                        print(f"✅ Verwende rag_agent.result direkt")
+                        answer_text = rag_agent.result.get('answer', 'Keine Antwort erhalten.')
+                        plot_created = rag_agent.result.get('plot_created', False)
+                        plot_result = rag_agent.result.get('plot_result', None)
+                    elif isinstance(response, dict):
+                        # Fallback: response ist ein Dictionary
+                        print(f"✅ Response ist Dictionary")
+                        answer_text = response.get('answer', 'Keine Antwort erhalten.')
+                        plot_created = response.get('plot_created', False)
+                        plot_result = response.get('plot_result', None)
+                    elif isinstance(response, tuple) and len(response) == 2:
+                        # Plot-Tuple: (fig, ax)
+                        print(f"✅ Response ist Plot-Tuple")
+                        answer_text = 'Visualisierung erstellt.'
+                        plot_created = True
+                        plot_result = response
+                    else:
+                        # Letzter Fallback
+                        print(f"⚠️ Unerwartete Response: {type(response)}")
+                        answer_text = 'Keine Antwort erhalten.'
+                        plot_created = False
+                        plot_result = None
+
                     # Zeige die Antwort
-                    st.markdown(response) #full on testing mode
-                    
+                    st.markdown(answer_text)
+
                     # Zeige Plot falls vorhanden
                     if plot_created and plot_result is not None:
-                        col1, col2 = st.columns([2,2])
+                        col1, col2 = st.columns([2, 2])
                         with col1:
                             fig, ax = plot_result  # Tuple auspacken
                             st.pyplot(fig)
-                        
+
                         # Speichere mit Plot-Daten
                         st.session_state.messages.append({
                             'role': 'assistant',
