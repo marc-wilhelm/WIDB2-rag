@@ -248,25 +248,25 @@ if st.session_state.is_processing:
                     # WORKAROUND: query() gibt nicht das komplette Dictionary zurück
                     # Greife direkt auf rag_agent.result zu
                     if hasattr(rag_agent, 'result') and isinstance(rag_agent.result, dict):
-                        print(f"✅ Verwende rag_agent.result direkt")
+                        print(f"Verwende rag_agent.result direkt")
                         answer_text = rag_agent.result.get('answer', 'Keine Antwort erhalten.')
                         plot_created = rag_agent.result.get('plot_created', False)
                         plot_result = rag_agent.result.get('plot_result', None)
                     elif isinstance(response, dict):
                         # Fallback: response ist ein Dictionary
-                        print(f"✅ Response ist Dictionary")
+                        print(f"Response ist Dictionary")
                         answer_text = response.get('answer', 'Keine Antwort erhalten.')
                         plot_created = response.get('plot_created', False)
                         plot_result = response.get('plot_result', None)
                     elif isinstance(response, tuple) and len(response) == 2:
                         # Plot-Tuple: (fig, ax)
-                        print(f"✅ Response ist Plot-Tuple")
+                        print(f"Response ist Plot-Tuple")
                         answer_text = 'Visualisierung erstellt.'
                         plot_created = True
                         plot_result = response
                     else:
                         # Letzter Fallback
-                        print(f"⚠️ Unerwartete Response: {type(response)}")
+                        print(f"Unerwartete Response: {type(response)}")
                         answer_text = 'Keine Antwort erhalten.'
                         plot_created = False
                         plot_result = None
