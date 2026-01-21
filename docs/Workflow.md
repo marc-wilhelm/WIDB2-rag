@@ -78,9 +78,9 @@
 ## 5. Retrieval-Augmented Generation (RAG)
 ### 5.1 Verbindung von Datenbank und Sprachmodell
 
-- Das RAG-System verbindet die ChromaDB-Vektordatenbank mit dem Claude-LLM.
+- Das [RAG-System](../src/RagAgent.py#L206) verbindet die ChromaDB-Vektordatenbank mit dem Claude-LLM.
 
-- Auf Basis einer Benutzeranfrage werden semantisch relevante Textsegmente aus der Datenbank abgerufen.
+- Auf Basis einer Benutzeranfrage werden semantisch relevante [Textsegmente](../src/RagAgent.py#L31) aus der Datenbank abgerufen.
 
 ### 5.2 Kontextübergabe an das Sprachmodell
 
